@@ -11,7 +11,40 @@ var options = {
 };
 
 var tests = [
-    { input: { values: [ { value: "ABAB"}, { value: "BABA"}]}, output: { lcs : [{value: "ABA"}, {value: "BAB"}]} }
+    { // basic test from Wikipedia, has more than one answer
+        input: { values: [ { value: "ABAB"}, { value: "BABA"}]}, 
+        output: { lcs : [{value: "ABA"}, {value: "BAB"}]} 
+    },
+    { // example from the assignment
+        input: { values: [ { "value" : "comcast" },
+            { "value" : "comcastic" }, 
+            { "value" : "broadcaster" } ]}, 
+        output: { lcs : [{value: "cast"} ]} 
+    },
+    { // too few arguments
+        input: { values: [ { value: "one"} ]}, 
+        output: "error" 
+    },
+    { // not a set
+        input: { values: [ { value: "one"}, { value: "two"}, {value: "one"} ]}, 
+        output: "error" 
+    },
+    { // no input
+        input: { values: '' }, 
+        output: "error" 
+    },
+    { // random string with a staged similarity
+        input: { values: [ { "value" : "xXS8kt2HdWocastJtZUZW7F8iPS6h64tYbqoccomkXaB2IS" },
+            { "value" : "ZKudKN4ZKlEp2comU4OUzsvX0EKUihy855gy1IFsuKB" }, 
+            { "value" : "QbyzIJsj5Tpcomcast6ir7XOCZ7kifoApXa85DwMV8cyLl3" } ]}, 
+        output: { lcs : [{value: "com"} ]} 
+    },
+    { // strings with no similarities
+        input: { values: [ { "value" : "abcdefghijWXYZ0123" },
+            { "value" : "klmnopqrstuvwxyzAB45678" }, 
+            { "value" : "CDEFGHIJKLMNOPQRSTUV90" } ]}, 
+        output: { lcs : []} 
+    }
 ];
 
 var passed = true;
