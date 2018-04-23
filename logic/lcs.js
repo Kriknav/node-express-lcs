@@ -81,13 +81,16 @@ Lcs.prototype.find = function(arr){
         do {
           // pop off the first answer from previous round and lcs() with next arg string
           temp1 = lcs(answers.pop(), arr[i]);
-          // if this our first time with this arg string or if we found longer lcs() than previously, save it
-          if (temp.length === 0 || temp[0].length < temp1[0].length) {
-            temp = temp1;
-          }
-          // otherwise if these answers are same length, append them
-          else if (temp.length > 0 && temp[0].length === temp1[0].length) {
-            temp = temp.concat(temp1);
+
+          if (temp1.length > 0){ // if we found any answers
+            // if this our first time with this arg string or if we found longer lcs() than previously, save it
+            if (temp.length === 0 || temp[0].length < temp1[0].length) {
+                temp = temp1;
+            }
+            // otherwise if these answers are same length, append them
+            else if (temp.length > 0 && temp[0].length === temp1[0].length) {
+                temp = temp.concat(temp1);
+            }
           }
         } while (answers.length > 0); // use up all the answers
         answers = temp; // save whatever we found for next iteration or return
